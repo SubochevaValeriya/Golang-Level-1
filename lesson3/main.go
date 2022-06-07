@@ -76,12 +76,11 @@ func calc(a, b float64, operation string) string {
 func simple(n int) []int {
 	result := []int{}
 	for i := 2; i <= n; i++ {
-		for j := 2; j <= n; j++ {
+		for j := 2; j <= i; j++ {
 			if i%j == 0 && i != j {
 				break
-			} else if i%j == 0 && i == j {
+			} else if i == j {
 				result = append(result, i)
-			} else {
 			}
 		}
 	}
