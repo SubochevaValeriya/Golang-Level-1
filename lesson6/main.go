@@ -12,7 +12,6 @@ func (m myType) Read(p []byte) (n int, err error) {
 	for range p {
 		n++
 	}
-
 	return n, io.EOF
 }
 
