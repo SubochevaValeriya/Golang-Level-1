@@ -1,27 +1,27 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"io"
 )
 
 type myType []byte
 
-func (m myType) Read(p []byte) (n int, err error) {
-	for range p {
-		n++
+func (m *myType) Read(p []byte) (n int, err error) {
+
+	for i, value := range *m {
+		p[i] = value
 	}
+
+	n = len(*m)
 	return n, io.EOF
 }
 
-func (m myType) Write(p []byte) (n int, err error) {
-	for range p {
-		n++
-	}
-	if n != len(string(p)) {
-		err = errors.New("Ошибка считывания")
-	}
+func (m *myType) Write(p []byte) (n int, err error) {
+	*m = p
+
+	n = len(*m)
+
 	return n, err
 }
 
@@ -36,10 +36,11 @@ type Reader interface {
 func main() {
 	m := myType{}
 
-	io.WriteString(m, "Привет")
-	fmt.Println(m)
+	io.WriteString(&m, "Привет")
 
-	myStr, _ := io.ReadAll(m)
+	fmt.Println(string(m))
+
+	myStr, _ := io.ReadAll(&m)
 
 	fmt.Println(string(myStr))
 }
