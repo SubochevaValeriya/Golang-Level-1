@@ -9,16 +9,14 @@ type myType []byte
 
 func (m *myType) Read(p []byte) (n int, err error) {
 
-	for i, value := range *m {
-		p[i] = value
-	}
+	copy(p, *m)
 
 	n = len(*m)
 	return n, io.EOF
 }
 
 func (m *myType) Write(p []byte) (n int, err error) {
-	*m = p
+	*m = append(*m, p...)
 
 	n = len(*m)
 
