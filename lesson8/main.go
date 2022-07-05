@@ -16,7 +16,7 @@ func main() {
 
 	// USING ENVIRONMENTAL VARIABLES
 	// SET (Windows)/EXPORT (Linux) ENVs
-	fmt.Printf("Configuration from env: %v\nn", readConfiguration.GetConfigurationFromEnv())
+	fmt.Printf("Configuration from env: %v\n", readConfiguration.GetConfigurationFromEnv())
 
 	// FROM JSON:
 	dataJson, err := os.ReadFile("configuration.json")
